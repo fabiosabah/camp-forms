@@ -26,7 +26,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             overflow: hidden;
         }
 
@@ -34,7 +34,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.0; /* Aumentei a opacidade do vídeo */
+            opacity: 0.6; /* Aumentei a opacidade do vídeo */
         }
 
         /* Overlay mais claro para melhor visibilidade do vídeo */
@@ -44,7 +44,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.4) 0%, rgba(22, 33, 62, 0.5) 50%, rgba(15, 52, 96, 0.4) 100%);
+            z-index: -1;
         }
 
         .background-pattern {
@@ -267,6 +268,28 @@
             pointer-events: none;
         }
 
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 12px 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .audio-control:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -322,10 +345,15 @@
 <body>
     <!-- Vídeo de fundo -->
     <div class="video-background">
-        <video autoplay loop playsinline preload="auto">
+        <video id="backgroundVideo" autoplay muted loop playsinline preload="auto" volume="0.3">
             <source src="cs-ancient-1.webm" type="video/webm">
             <source src="cs-ancient.mp4" type="video/mp4">
         </video>
+    </div>
+
+    <!-- Controle de áudio -->
+    <div class="audio-control" id="audioControl">
+        🔇 Clique para ativar som
     </div>
 
     <!-- Overlay para melhorar legibilidade -->
@@ -423,6 +451,24 @@
     </div>
 
     <script>
+        // Controle de áudio do vídeo
+        const video = document.getElementById('backgroundVideo');
+        const audioControl = document.getElementById('audioControl');
+        let audioEnabled = false;
+
+        audioControl.addEventListener('click', function() {
+            if (!audioEnabled) {
+                video.muted = false;
+                video.volume = 0.3; // Volume baixo para não incomodar
+                audioControl.innerHTML = '🔊 Som ativado';
+                audioEnabled = true;
+            } else {
+                video.muted = true;
+                audioControl.innerHTML = '🔇 Clique para ativar som';
+                audioEnabled = false;
+            }
+        });
+
         // Formatação do telefone
         document.getElementById('phone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
@@ -501,7 +547,7 @@
             console.log('Site carregado - Pronto para receber inscrições!');
             
             // Remover placeholder quando vídeo carregar
-            const video = document.querySelector('video');
+            const video = document.getElementById('backgroundVideo');
             const placeholder = document.querySelector('.video-placeholder');
             
             if (video && placeholder) {
