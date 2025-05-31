@@ -34,17 +34,17 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.4; /* Deixa o vídeo mais sutil */
+            opacity: 0.6; /* Aumentei a opacidade do vídeo */
         }
 
-        /* Overlay escuro para melhor legibilidade */
+        /* Overlay mais claro para melhor visibilidade do vídeo */
         .video-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(22, 33, 62, 0.85) 50%, rgba(15, 52, 96, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.4) 0%, rgba(22, 33, 62, 0.5) 50%, rgba(15, 52, 96, 0.4) 100%);
             z-index: -1;
         }
 
@@ -55,8 +55,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(220, 53, 69, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 25% 25%, rgba(255, 193, 7, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(220, 53, 69, 0.08) 0%, transparent 50%);
             z-index: 0;
         }
 
@@ -89,27 +89,27 @@
             font-size: 1.2em;
             color: #b8c5d1;
             margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .tournament-info {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 30px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             animation: fadeInUp 1s ease-out 0.2s both;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
         }
 
         .form-container {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 30px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
             animation: fadeInUp 1s ease-out 0.4s both;
         }
 
@@ -122,7 +122,7 @@
             margin-bottom: 8px;
             font-weight: 600;
             color: #e1e8ed;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .form-group input,
@@ -144,7 +144,7 @@
             border-color: #ffc107;
             box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
             transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
         }
 
         .form-group input::placeholder {
@@ -162,7 +162,7 @@
         .payment-section {
             margin-top: 30px;
             padding: 20px;
-            background: rgba(40, 167, 69, 0.15);
+            background: rgba(40, 167, 69, 0.2);
             border-radius: 10px;
             border: 1px solid rgba(40, 167, 69, 0.4);
             backdrop-filter: blur(10px);
@@ -184,7 +184,7 @@
             display: none;
             margin-top: 15px;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 8px;
             border-left: 4px solid #28a745;
             backdrop-filter: blur(10px);
@@ -315,14 +315,13 @@
             }
 
             .video-background video {
-                opacity: 0.3; /* Ainda mais sutil em mobile */
+                opacity: 0.5; /* Mantém visível em mobile */
             }
         }
     </style>
 </head>
 <body>
     <!-- Vídeo de fundo -->
-    <body>
     <div class="video-background">
         <video autoplay muted loop playsinline preload="auto">
             <source src="cs-ancient-1.webm" type="video/webm">
@@ -344,9 +343,8 @@
         <div class="tournament-info">
             <h3>📅 Informações do Campeonato</h3>
             <p><strong>Modalidade:</strong> Counter-Strike 2</p>
-            <p><strong>Modo:</strong> Os jogadores vão ser draftados pelos lideres de cada time,, todo mundo vai jogar.</p>
+            <p><strong>Modo:</strong> Os jogadores vão ser draftados pelos lideres de cada time, todo mundo vai jogar.</p>
             <p><strong>Atenção:</strong></p>
-
             <p><strong>Formato:</strong> Eliminação Simples</p>
             <p><strong>Taxa de Inscrição:</strong> R$ 25,00 (Opcional)</p>
             <p><strong>Premiação:</strong> A definir conforme participantes</p>
