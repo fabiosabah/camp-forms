@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campeonato CS2 - Registro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(220, 53, 69, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffc107, #dc3545);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #b8c5d1;
+            margin-bottom: 20px;
+        }
+
+        .tournament-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #e1e8ed;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffc107;
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .rank-select {
+            position: relative;
+        }
+
+        .rank-select select {
+            cursor: pointer;
+        }
+
+        .payment-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(40, 167, 69, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+
+        .payment-toggle {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .payment-toggle input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .pix-info {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+
+        .pix-info.show {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ffc107, #dc3545);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideInUp 0.5s ease-out;
+        }
+
+        .discord-btn {
+            display: inline-block;
+            background: #5865f2;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .discord-btn:hover {
+            background: #4752c4;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">Camp da Pracinha</div>
+            <div class="subtitle">Registre-se para o Campeonato</div>
+        </div>
+
+        <div class="tournament-info">
+            <h3>📅 Informações do Campeonato</h3>
+            <p><strong>Modalidade:</strong> Counter-Strike 2</p>
+            <p><strong>Modo:</strong> Os jogadores vão ser draftados pelos lideres de cada time,, todo mundo vai jogar.</p>
+            <p><strong>Atenção:</strong></p>
+
+            <p><strong>Formato:</strong> Eliminação Simples</p>
+            <p><strong>Taxa de Inscrição:</strong> R$ 25,00 (Opcional)</p>
+            <p><strong>Premiação:</strong> A definir conforme participantes</p>
+        </div>
+
+        <div class="form-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="playerName">🎮 Nome do Jogador</label>
+                    <input type="text" id="playerName" name="playerName" placeholder="Digite seu nick/nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">📱 Telefone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(11) 99999-9999" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">📧 E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="rank">🏆 Rank</label>
+                    <div class="rank-select">
+                        <select id="rank" name="rank" required>
+                            <option value="">Selecione seu rank</option>
+                            <option value="Prata I">Prata I</option>
+                            <option value="Prata II">Prata II</option>
+                            <option value="Prata III">Prata III</option>
+                            <option value="Prata IV">Prata IV</option>
+                            <option value="Prata Elite">Prata Elite</option>
+                            <option value="Prata Elite Master">Prata Elite Master</option>
+                            <option value="Ouro I">Ouro I</option>
+                            <option value="Ouro II">Ouro II</option>
+                            <option value="Ouro III">Ouro III</option>
+                            <option value="Ouro IV">Ouro IV</option>
+                            <option value="AK I">AK I</option>
+                            <option value="AK II">AK II</option>
+                            <option value="AK Cruzada">AK Cruzada</option>
+                            <option value="Xerife">Xerife</option>
+                            <option value="Águia I">Águia I</option>
+                            <option value="Águia II">Águia II</option>
+                            <option value="Supremo">Supremo</option>
+                            <option value="Global Elite">Global Elite</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="payment-section">
+                    <div class="payment-toggle">
+                        <input type="checkbox" id="payNow" name="payNow">
+                        <label for="payNow">💳 Pagar inscrição agora (R$ 25,00)</label>
+                    </div>
+                    
+                    <div class="pix-info" id="pixInfo">
+                        <h4>📱 Pagamento via PIX</h4>
+                        <p><strong>Chave PIX:</strong> campeonato@cs2.com</p>
+                        <p><strong>Valor:</strong> R$ 25,00</p>
+                        <p><em>Após o pagamento, envie o comprovante no Discord!</em></p>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    🚀 Confirmar Inscrição
+                </button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <h3>✅ Inscrição Realizada com Sucesso!</h3>
+                <p>Bem-vindo ao campeonato! Agora junte-se ao nosso Discord para mais informações.</p>
+                <a href="https://discord.gg/TqGJJuQ99a" class="discord-btn" target="_blank">
+                    💬 Entrar no Discord
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Formatação do telefone
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                if (value.length < 14) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+                }
+                e.target.value = value;
+            }
+        });
+
+        // Toggle PIX info
+        document.getElementById('payNow').addEventListener('change', function() {
+            const pixInfo = document.getElementById('pixInfo');
+            if (this.checked) {
+                pixInfo.classList.add('show');
+            } else {
+                pixInfo.classList.remove('show');
+            }
+        });
+
+        // URL do Google Apps Script (você vai substituir pela sua URL)
+        const GOOGLE_SCRIPT_URL = 'COLE_SUA_URL_AQUI';
+
+        // Formulário de submissão
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Desabilitar botão para evitar duplo envio
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '⏳ Enviando...';
+            submitBtn.disabled = true;
+            
+            const formData = {
+                playerName: document.getElementById('playerName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                rank: document.getElementById('rank').value,
+                payNow: document.getElementById('payNow').checked ? 'Sim' : 'Não',
+                timestamp: new Date().toLocaleString('pt-BR')
+            };
+
+            try {
+                // Enviar dados para Google Sheets
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // Mostrar mensagem de sucesso
+                document.getElementById('registrationForm').style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
+
+                console.log('Jogador registrado com sucesso:', formData);
+
+            } catch (error) {
+                console.error('Erro ao enviar dados:', error);
+                
+                // Mostrar erro para o usuário
+                alert('Erro ao enviar inscrição. Tente novamente ou contate o organizador.');
+                
+                // Restaurar botão
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Carregar dados salvos ao iniciar
+        window.addEventListener('load', function() {
+            console.log('Site carregado - Pronto para receber inscrições!');
+        });
+
+        // Adicionar efeitos de hover nos inputs
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
