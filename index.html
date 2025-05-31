@@ -13,10 +13,39 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
             color: #fff;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Vídeo de fundo */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4; /* Deixa o vídeo mais sutil */
+        }
+
+        /* Overlay escuro para melhor legibilidade */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(22, 33, 62, 0.85) 50%, rgba(15, 52, 96, 0.85) 100%);
+            z-index: -1;
         }
 
         .background-pattern {
@@ -28,7 +57,7 @@
             background-image: 
                 radial-gradient(circle at 25% 25%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, rgba(220, 53, 69, 0.1) 0%, transparent 50%);
-            z-index: -1;
+            z-index: 0;
         }
 
         .container {
@@ -53,31 +82,34 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
         }
 
         .subtitle {
             font-size: 1.2em;
             color: #b8c5d1;
             margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .tournament-info {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             animation: fadeInUp 1s ease-out 0.2s both;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
         .form-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             animation: fadeInUp 1s ease-out 0.4s both;
         }
 
@@ -90,30 +122,33 @@
             margin-bottom: 8px;
             font-weight: 600;
             color: #e1e8ed;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
             padding: 12px 16px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             color: #fff;
             font-size: 16px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
             border-color: #ffc107;
-            box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
             transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .rank-select {
@@ -127,9 +162,10 @@
         .payment-section {
             margin-top: 30px;
             padding: 20px;
-            background: rgba(40, 167, 69, 0.1);
+            background: rgba(40, 167, 69, 0.15);
             border-radius: 10px;
-            border: 1px solid rgba(40, 167, 69, 0.3);
+            border: 1px solid rgba(40, 167, 69, 0.4);
+            backdrop-filter: blur(10px);
         }
 
         .payment-toggle {
@@ -148,9 +184,10 @@
             display: none;
             margin-top: 15px;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             border-left: 4px solid #28a745;
+            backdrop-filter: blur(10px);
         }
 
         .pix-info.show {
@@ -171,11 +208,12 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
         }
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.4);
         }
 
         .submit-btn:active {
@@ -190,6 +228,7 @@
             padding: 20px;
             margin-top: 20px;
             text-align: center;
+            backdrop-filter: blur(10px);
         }
 
         .success-message.show {
@@ -212,6 +251,21 @@
         .discord-btn:hover {
             background: #4752c4;
             transform: translateY(-2px);
+        }
+
+        /* Placeholder para vídeo - você deve substituir pelo seu arquivo */
+        .video-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            pointer-events: none;
         }
 
         @keyframes fadeInDown {
@@ -259,10 +313,30 @@
             .logo {
                 font-size: 2.5em;
             }
+
+            .video-background video {
+                opacity: 0.3; /* Ainda mais sutil em mobile */
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Vídeo de fundo -->
+    <div class="video-background">
+        <!-- Substitua o src pelo caminho do seu vídeo -->
+        <video autoplay muted loop playsinline>
+            <!-- <source src="seu-video-cs2.mp4" type="video/mp4"> -->
+            <source src="cs-ancient-1.webm" type="video/webm">
+            <!-- Fallback para navegadores que não suportam vídeo -->
+        </video>
+        <div class="video-placeholder">
+            📹 Substitua "seu-video-cs2.mp4" pelo caminho do seu vídeo de CS2
+        </div>
+    </div>
+
+    <!-- Overlay para melhorar legibilidade -->
+    <div class="video-overlay"></div>
+    
     <div class="background-pattern"></div>
     
     <div class="container">
@@ -432,6 +506,20 @@
         // Carregar dados salvos ao iniciar
         window.addEventListener('load', function() {
             console.log('Site carregado - Pronto para receber inscrições!');
+            
+            // Remover placeholder quando vídeo carregar
+            const video = document.querySelector('video');
+            const placeholder = document.querySelector('.video-placeholder');
+            
+            if (video && placeholder) {
+                video.addEventListener('loadeddata', function() {
+                    placeholder.style.display = 'none';
+                });
+                
+                video.addEventListener('error', function() {
+                    placeholder.innerHTML = '❌ Erro ao carregar vídeo<br>Verifique o caminho do arquivo';
+                });
+            }
         });
 
         // Adicionar efeitos de hover nos inputs
